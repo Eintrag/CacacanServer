@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-compression-jzlib-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-resolver-dnsjava-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-resolver-javax-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-resolver-minidns-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-android-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-android-extensions-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-debug-slf4j-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-sasl-javax-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-sasl-provided-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-bosh-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-java7-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-experimental-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-im-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-tcp-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-debug-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-legacy-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-jingle-old-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-core-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/smack-extensions-4.1.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/smack-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/log4j-api-2.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/log4j-core-2.8.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/SergioFlores/workspace/Cacacan_CentralServer/libs/sqlite-jdbc-3.8.11.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

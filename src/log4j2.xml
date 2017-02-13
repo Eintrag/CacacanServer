@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j2.xml>
+<configuration status="error">
+	<properties>
+		<property name="logDir">log</property>
+		<property name="testDir">test</property>
+		<property name="rootLogLevel">info</property>
+		<property name="appLogLevel">debug</property>
+		<property name="testLevel">info</property>
+		<property name="sqlLogLevel">error</property>
+		<property name="jdbcLogLevel">error</property>
+		<property name="patternWithClassName">%d{yy-MM-dd HH:mm:ss,SSS} [%-7p] %m%n%rEx</property>
+	</properties>
+
+	<appenders>
+		<Console name="activity_console" target="SYSTEM_OUT">
+			<ThresholdFilter level="ERROR" onMatch="DENY"
+				onMismatch="ACCEPT" />
+			<PatternLayout pattern="${patternWithClassName}" />
+		</Console>
+
+		<Console name="error_console" target="SYSTEM_ERR">
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout pattern="${patternWithClassName}" />
+		</Console>
+
+		<RollingFile name="activity" fileName="${logDir}/activity.log"
+			filePattern="${logDir}/activity.%i.log">
+			<ThresholdFilter level="INFO" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout pattern="${patternWithClassName}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="2 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="9" />
+		</RollingFile>
+
+		<RollingFile name="error" fileName="${logDir}/error.log"
+			filePattern="${logDir}/error.%i.log">
+			<ThresholdFilter level="ERROR" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout pattern="${patternWithClassName}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="2 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="9" />
+		</RollingFile>
+
+	</appenders>
+
+	<loggers>
+		<root level="${sys:rootLogLevel}">
+			<appender-ref ref="activity" />
+			<appender-ref ref="activity_console" />
+			<appender-ref ref="error" />
+			<appender-ref ref="error_console" />
+		</root>
+		<!-- Define all loggers additivity="false" with additivity="false" to prevent duplicate output through root appender -->
+		<logger name="com.cacacan" level="${appLogLevel}" additivity="false">
+			<appender-ref ref="activity" />
+			<appender-ref ref="activity_console" />
+			<appender-ref ref="error" />
+			<appender-ref ref="error_console" />
+		</logger>
+		<logger name="com.cacaca.persistence" level="${sqlLogLevel}"
+			additivity="false"><!-- Overwrite on demand -->
+			<appender-ref ref="activity" />
+			<appender-ref ref="activity_console" />
+			<appender-ref ref="error" />
+			<appender-ref ref="error_console" />
+		</logger>
+		<logger name="log4jdbc.log4j2" level="${jdbcLogLevel}"
+			additivity="false">
+			<appender-ref ref="activity" />
+			<appender-ref ref="activity_console" />
+			<appender-ref ref="error" />
+			<appender-ref ref="error_console" />
+		</logger>
+	</loggers>
+</configuration>
