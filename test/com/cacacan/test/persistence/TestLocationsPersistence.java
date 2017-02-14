@@ -29,16 +29,20 @@ public class TestLocationsPersistence {
 	}
 
 	@Test
-	public void testInsertLocations() throws Exception {
-		assertEquals(0, LocationToCleanDAO.getLocationsToCleanForUser("Manolo").size());
+	public void testInsertAndFetchLocations() throws Exception {
+		assertEquals(0, LocationToCleanDAO.getLocationsToCleanForUser("Manolo", 1).size());
 		insertLocations();
-		assertEquals(1, LocationToCleanDAO.getLocationsToCleanForUser("Manolo").size());
+		assertEquals(1, LocationToCleanDAO.getLocationsToCleanForUser("Manolo", 1).size());
+		assertEquals(2, LocationToCleanDAO.getLocationsToCleanForUser("Manolo", 2).size());
+
 	}
 
 	private void insertLocations() {
 		final Location locationToClean = new Location("38.9342534", "-3.9848568");
 		final java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
 		final Employee assignedEmployee = LocationEmployeeAssigner.getEmployeeForLocation(locationToClean);
+		// insert 2 locations to clean
+		LocationToCleanDAO.insertLocationToClean(locationToClean, assignedEmployee, currentDate, null);
 		LocationToCleanDAO.insertLocationToClean(locationToClean, assignedEmployee, currentDate, null);
 	}
 

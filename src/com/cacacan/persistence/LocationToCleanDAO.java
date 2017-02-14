@@ -46,10 +46,11 @@ public class LocationToCleanDAO {
 		}
 	}
 
-	public static List<Location> getLocationsToCleanForUser(String assignedEmployee) {
+	public static List<Location> getLocationsToCleanForUser(String assignedEmployee, int maxNumLocations) {
 		final List<Location> locationsToCleanForUser = new ArrayList<Location>();
 		try (Connection db = getConnection()) {
-			final String sql = "select latitude, longitude FROM LocationsToClean where assigned_employee = ?";
+			String sql = "select latitude, longitude FROM LocationsToClean where assigned_employee = ?";
+			if (maxNumLocations > 0) sql += "limit " + maxNumLocations;
 			final PreparedStatement ps = db.prepareStatement(sql);
 			ps.setString(1, assignedEmployee);
 			final ResultSet r = ps.executeQuery();
@@ -77,10 +78,11 @@ public class LocationToCleanDAO {
 		// TODO remove
 		try {
 			final Connection db = getConnection();
-			final String sql = "CREATE TABLE LocationsToClean "
-					+ "(id INTEGER NOT NULL PRIMARY KEY, " + "latitude varchar(10) NOT NULL, "
-					+ "longitude varchar(10) NOT NULL, " + "assigned_employee varchar(255) NOT NULL, "
-					+ "date_received DATE NOT NULL, " + "date_cleaned DATE);";
+			final String sql =
+					"CREATE TABLE LocationsToClean "
+							+ "(id INTEGER NOT NULL PRIMARY KEY, " + "latitude varchar(10) NOT NULL, "
+							+ "longitude varchar(10) NOT NULL, " + "assigned_employee varchar(255) NOT NULL, "
+							+ "date_received DATE NOT NULL, " + "date_cleaned DATE);";
 			final PreparedStatement ps = db.prepareStatement(sql);
 			ps.execute();
 
