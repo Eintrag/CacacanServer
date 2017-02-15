@@ -1,11 +1,7 @@
 package com.cacacan.model;
 
-import java.io.InputStream;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.cacacan.receiver.JSONUtils;
 
 public class Location {
 	String latitude;
@@ -16,10 +12,9 @@ public class Location {
 		this.longitude = longitude;
 	}
 
-	public Location(InputStream inputStream) throws JSONException {
-		final JSONObject parsedJSONObject = new JSONObject(JSONUtils.readInputStream(inputStream));
-		this.latitude = parsedJSONObject.getString("latitude");
-		this.longitude = parsedJSONObject.getString("longitude");
+	public Location(JSONObject jso) throws JSONException {
+		this.latitude = jso.getString("latitude");
+		this.longitude = jso.getString("longitude");
 
 	}
 
@@ -34,6 +29,13 @@ public class Location {
 	@Override
 	public String toString() {
 		return "Location = latitude: " + latitude + " longitude = " + longitude;
+	}
+
+	public Object toJSON() throws JSONException {
+		final JSONObject jso = new JSONObject();
+		jso.put("latitude", latitude);
+		jso.put("longitude", longitude);
+		return jso;
 	}
 
 }

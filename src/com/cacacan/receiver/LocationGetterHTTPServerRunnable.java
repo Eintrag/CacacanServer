@@ -1,14 +1,18 @@
 package com.cacacan.receiver;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.cacacan.assignationofemployees.LocationEmployeeAssigner;
+import com.cacacan.model.AvailableActionsEnum;
 import com.cacacan.model.Location;
 import com.cacacan.persistence.LocationToCleanDAO;
 import com.cacacan.sender.GcmSenderRunnable;
@@ -38,12 +42,34 @@ public class LocationGetterHTTPServerRunnable implements Runnable {
 	}
 
 	private void serverActions(Socket socket) throws IOException {
+		final String jsoString = ServerUtils.readInputStream(socket.getInputStream());
 		try {
-			final Location receivedLocation = new Location(socket.getInputStream());
-			sendResponse(socket);
-			LocationToCleanDAO.insertLocationToClean(receivedLocation, LocationEmployeeAssigner.getEmployeeForLocation(
-					receivedLocation), new java.sql.Date(System.currentTimeMillis()), null);
-			sendNewLocationNoticeViaGCM();
+			final JSONObject jso = new JSONObject(jsoString);
+			final AvailableActionsEnum actionType = AvailableActionsEnum.valueOf(jso.getString("action_type"));
+			switch (actionType) {
+			case SEND_LOCATION:
+				final Location receivedLocation = new Location(jso);
+				sendResponse(socket);
+				LocationToCleanDAO.insertLocationToClean(receivedLocation, LocationEmployeeAssigner
+						.getEmployeeForLocation(receivedLocation), new java.sql.Date(System.currentTimeMillis()), null);
+				sendNewLocationNoticeViaGCM();
+				break;
+			case GET_LOCATIONS_FOR_USER:
+				final List<Location> locationsToClean =
+						LocationToCleanDAO.getLocationsToCleanForUser(jso.getString("user"), 1);
+				String message = "";
+				if (!locationsToClean.isEmpty()) {
+					message = locationsToClean.get(0).toJSON().toString();
+				}
+
+				final DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
+				outToServer.writeBytes(message);
+				outToServer.flush();
+				outToServer.close();
+				break;
+			default:
+			}
+
 		} catch (final JSONException e) {
 			LOGGER.error("Could not parse JSON from http");
 		}
