@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 
 public class LocationGetterHTTPServerRunnable implements Runnable {
 	private static final Logger LOGGER = LogManager.getLogger(LocationGetterHTTPServerRunnable.class);
-	private static final int PORT_TO_LISTEN = 8080;
+	private static final int PORT_TO_LISTEN = 4567;
 
 	@Override
 	public void run() {
