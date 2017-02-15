@@ -16,6 +16,7 @@ import com.cacacan.model.AvailableActionsEnum;
 import com.cacacan.model.Location;
 import com.cacacan.persistence.LocationToCleanDAO;
 import com.cacacan.sender.GcmSenderRunnable;
+import com.google.gson.Gson;
 
 public class LocationGetterHTTPServerRunnable implements Runnable {
 	private static final Logger LOGGER = LogManager.getLogger(LocationGetterHTTPServerRunnable.class);
@@ -55,11 +56,12 @@ public class LocationGetterHTTPServerRunnable implements Runnable {
 				sendNewLocationNoticeViaGCM();
 				break;
 			case GET_LOCATIONS_FOR_USER:
+				final int maxNumberOfLocations = 5;
 				final List<Location> locationsToClean =
-						LocationToCleanDAO.getLocationsToCleanForUser(jso.getString("user"), 1);
+						LocationToCleanDAO.getLocationsToCleanForUser(jso.getString("user"), maxNumberOfLocations);
 				String message = "";
 				if (!locationsToClean.isEmpty()) {
-					message = locationsToClean.get(0).toJSON().toString();
+					message = new Gson().toJson(locationsToClean);
 				}
 
 				final DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());

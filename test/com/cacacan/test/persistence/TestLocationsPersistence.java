@@ -39,11 +39,13 @@ public class TestLocationsPersistence {
 
 	private void insertLocations() {
 		final Location locationToClean = new Location("38.9342534", "-3.9848568");
+		final Location locationToClean2 = new Location("58.9342534", "-5.9848568");
+
 		final java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
 		final Employee assignedEmployee = LocationEmployeeAssigner.getEmployeeForLocation(locationToClean);
 		// insert 2 locations to clean
 		LocationToCleanDAO.insertLocationToClean(locationToClean, assignedEmployee, currentDate, null);
-		LocationToCleanDAO.insertLocationToClean(locationToClean, assignedEmployee, currentDate, null);
+		LocationToCleanDAO.insertLocationToClean(locationToClean2, assignedEmployee, currentDate, null);
 	}
 
 }
