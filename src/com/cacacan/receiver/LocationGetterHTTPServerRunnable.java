@@ -20,12 +20,21 @@ import com.google.gson.Gson;
 
 public class LocationGetterHTTPServerRunnable implements Runnable {
 	private static final Logger LOGGER = LogManager.getLogger(LocationGetterHTTPServerRunnable.class);
-	private static final int PORT_TO_LISTEN = 4567;
+	private static int PORT_TO_LISTEN = 4567;
 
 	@Override
 	public void run() {
 		LOGGER.info("Started receiver thread");
-		listenOnPort(PORT_TO_LISTEN);
+
+		listenOnPort(getHerokuAssignedPort());
+	}
+
+	public static int getHerokuAssignedPort() {
+		final ProcessBuilder processBuilder = new ProcessBuilder();
+		if (processBuilder.environment().get("PORT") != null) {
+			return Integer.parseInt(processBuilder.environment().get("PORT"));
+		}
+		return 4567;
 	}
 
 	private void listenOnPort(int port) {
