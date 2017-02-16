@@ -59,7 +59,7 @@ public class LocationGetterHTTPServerRunnable implements Runnable {
 	}
 
 	private String getLocationsForUserJSON(String user) {
-		final int maxNumberOfLocations = 100;
+		final int maxNumberOfLocations = 50;
 		final List<Location> locationsToClean =
 				LocationToCleanDAO.getLocationsToCleanForUser(user, maxNumberOfLocations);
 		String message = "";
