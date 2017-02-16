@@ -1,11 +1,13 @@
 package com.cacacan.launcher;
 
+import org.apache.log4j.BasicConfigurator;
+
 import com.cacacan.receiver.LocationGetterHTTPServerRunnable;
 
 public class ServerLauncher {
 
 	public static void main(String[] args) {
-		final Thread receivingThread = new Thread(new LocationGetterHTTPServerRunnable());
-		receivingThread.start();
+		BasicConfigurator.configure();
+		new LocationGetterHTTPServerRunnable().run();
 	}
 }
