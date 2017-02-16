@@ -1,6 +1,7 @@
 package com.cacacan.receiver;
 
 import static spark.Spark.get;
+import static spark.Spark.port;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class LocationGetterHTTPServerRunnable implements Runnable {
 	@Override
 	public void run() {
 		LOGGER.info("Started receiver thread");
+		port(getHerokuAssignedPort());
 		get("/hello", (req, res) -> "Hello World");
 
 		get("/getLocations/:user", (req, res) -> {
