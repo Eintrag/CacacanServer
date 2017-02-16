@@ -67,6 +67,7 @@ public class LocationGetterHTTPServerRunnable implements Runnable {
 			message = new Gson().toJson(locationsToClean);
 		}
 		return message;
+
 	}
 
 	private void sendNewLocationNoticeViaGCM() {
