@@ -49,7 +49,7 @@ public class LocationToCleanDAO {
 	public static List<Location> getLocationsToCleanForUser(String assignedEmployee, int maxNumLocations) {
 		final List<Location> locationsToCleanForUser = new ArrayList<Location>();
 		try (Connection db = getConnection()) {
-			String sql = "select latitude, longitude FROM LocationsToClean where assigned_employee = ?";
+			String sql = "select distinct latitude, longitude FROM LocationsToClean where assigned_employee = ?";
 			if (maxNumLocations > 0) sql += " limit " + maxNumLocations;
 			final PreparedStatement ps = db.prepareStatement(sql);
 			ps.setString(1, assignedEmployee);
