@@ -38,8 +38,8 @@ public class TestLocationsPersistence {
 	}
 
 	private void insertLocations() {
-		final Location locationToClean = new Location("38.9342534", "-3.9848568");
-		final Location locationToClean2 = new Location("58.9342534", "-5.9848568");
+		final Location locationToClean = new Location("41.4445574", "-3.3678568");
+		final Location locationToClean2 = new Location("40.4514524", "-5.9843318");
 
 		final java.sql.Date currentDate = new java.sql.Date(System.currentTimeMillis());
 		final Employee assignedEmployee = LocationEmployeeAssigner.getEmployeeForLocation(locationToClean);
